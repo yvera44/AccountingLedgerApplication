@@ -66,4 +66,16 @@ public class Transaction {
         this.itemPrice = itemPrice;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Transaction{");
+        sb.append("transactionDate='").append(transactionDate).append('\'');
+        sb.append(", itemType='").append(itemType).append('\'');
+        sb.append(", descriptions='").append(descriptions).append('\'');
+        sb.append(", vendorName='").append(vendorName).append('\'');
+        sb.append(", itemPrice=").append(itemPrice);
+        sb.append('}');
+        return sb.toString();
+    }
 }
+
