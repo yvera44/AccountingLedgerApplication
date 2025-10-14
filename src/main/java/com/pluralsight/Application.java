@@ -104,7 +104,7 @@ public class Application {
                 case "P":
                     displayPayments();
                     break;
-                case "A":
+                case "R":
                     displayReports();
                     break;
                 case "H":
@@ -130,21 +130,23 @@ public class Application {
 
     // Example menu actions
     public static void displayAllEntries() {
-        for (transactions transactions : transactions) {
-            if (!transactions.()) {
-                System.out.println(transactions.toString());
-            }
+        for (Transaction transaction : transactions) {
+            System.out.println(transactions.toString());
         }
     }
 
-    public static void showCheckedOutBooks() {
-        for (Book book : books) {
-            if (book.isCheckedOut()) {
-                System.out.println(book.toString());
-            }
+    public static void displayDeposits() {
 
-        }
     }
+    public static void displayPayments() {
+
+    }
+    public static void displayReports() {
+
+    }
+    private static void makePayment() {
+    }
+
 
     private static ArrayList<Transaction> readTransactions() {
         ArrayList<Transaction> transactions = new ArrayList<>();
@@ -164,6 +166,19 @@ public class Application {
                 System.out.println(line);
 
                 Transaction transaction = new Transaction();
+
+                String description = parts[2];
+                transaction.setDescription(description);
+//                OR
+//                employee.setName(parts[1]);
+
+
+//                String hoursWorkedAsString = parts[2];
+//                double hoursWorked = Double.parseDouble(hoursWorkedAsString);
+//                employee.setHoursWorked(hoursWorked);
+////                OR
+//                employee.setHoursWorked(Double.parseDouble(parts[2]));
+
 
             }
             bufferedReader.close();

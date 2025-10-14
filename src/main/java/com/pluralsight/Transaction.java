@@ -1,79 +1,83 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Transaction {
 
-    private String transactionDate;
-    private String itemType;
-    private String descriptions;
-    private String vendorName;
-    private double itemPrice;
+    private LocalDate transactionDate;
+    private LocalTime transactionTime;
+    private String description;
+    private String vendor;
+    private double amount;
 
     public Transaction() {
-        this.transactionDate = "";
-        this.itemType = "";
-        this.descriptions = "";
-        this.vendorName = "";
-        this.itemPrice = 0;
+        this.transactionDate = null;
+        this.transactionTime = null;
+        this.description = "";
+        this.vendor = "";
+        this.amount = 0;
     }
 
-//constructor
-    public Transaction(String transactionDate, String itemType, String descriptions, String vendorName, double itemPrice) {
+
+    public Transaction(LocalDate transactionDate, LocalTime transactionTime, String description, String vendor, double amount) {
         this.transactionDate = transactionDate;
-        this.itemType = itemType;
-        this.descriptions = descriptions;
-        this.vendorName = vendorName;
-        this.itemPrice = itemPrice;
+        this.transactionTime = transactionTime;
+        this.description = description;
+        this.vendor = vendor;
+        this.amount = amount;
     }
 
-//getters and setters
-    public String getTransactionDate() {
+
+
+    public LocalDate getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(String transactionDate) {
+    public void setTransactionDate(LocalDate transactionDate) {
         this.transactionDate = transactionDate;
     }
 
-    public String getItemType() {
-        return itemType;
+    public LocalTime getTransactionTime() {
+        return transactionTime;
     }
 
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
+    public void setTransactionTime(LocalTime transactionTime) {
+        this.transactionTime = transactionTime;
     }
 
-    public String getDescriptions() {
-        return descriptions;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescriptions(String descriptions) {
-        this.descriptions = descriptions;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getVendorName() {
-        return vendorName;
+    public String getVendor() {
+        return vendor;
     }
 
-    public void setVendorName(String vendorName) {
-        this.vendorName = vendorName;
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
     }
 
-    public double getItemPrice() {
-        return itemPrice;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setItemPrice(double itemPrice) {
-        this.itemPrice = itemPrice;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Transaction{");
-        sb.append("transactionDate='").append(transactionDate).append('\'');
-        sb.append(", itemType='").append(itemType).append('\'');
-        sb.append(", descriptions='").append(descriptions).append('\'');
-        sb.append(", vendorName='").append(vendorName).append('\'');
-        sb.append(", itemPrice=").append(itemPrice);
+        sb.append("transactionDate=").append(transactionDate);
+        sb.append(", transactionTime=").append(transactionTime);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", vendor='").append(vendor).append('\'');
+        sb.append(", amount=").append(amount);
         sb.append('}');
         return sb.toString();
     }
