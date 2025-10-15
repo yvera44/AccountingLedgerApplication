@@ -3,6 +3,9 @@ package com.pluralsight;
 import java.io.BufferedReader;
 import java.io.*;
 import java.io.FileReader;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -66,18 +69,35 @@ public class Application {
     }
 
     public static void addDeposit(){
-        System.out.print("Add deposit: ");
-        int transaction = scanner.nextInt();
-        scanner.nextLine(); //eats the carriage return
+
 
         try {
+            System.out.print("Add deposit: ");
+            double transaction1 = scanner.nextDouble();
+
             // create a FileWriter
             FileWriter fileWriter = new FileWriter("transactions.csv", true);
             // create a BufferedWriter
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            double userDepositAmount = 0;
+            Transaction transaction = null;
+            try {
+                userDepositAmount = scanner.nextDouble();
+                transaction = new Transaction(LocalDate.now(),
+                        LocalTime.now(),
+                        "Deposit",
+                        "User",
+                        userDepositAmount
+                );
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             // write to the file
-            bufferedWriter.write(transaction);
+            bufferedWriter.write(transaction.toString()); // <=========
             // close the writer
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
             bufferedWriter.close();
         } catch (IOException e) {
             System.out.println("ERROR: An unexpected error occurred");
@@ -122,7 +142,7 @@ public class Application {
     public static void displayLedger() {
         System.out.println("===== Ledger =====");
         System.out.println("(A) Display All Entries");
-        System.out.println("(D) Display only the entries that re deposits into the account");
+        System.out.println("(D) Display only the entries that are deposits into the account");
         System.out.println("(P) Display only the negative entries or payments");
         System.out.println("(R) Reports");
         System.out.println("(H) Go Back to Home Page..");
@@ -167,17 +187,27 @@ public class Application {
 
                 Transaction transaction = new Transaction();
 
+                String transactionDateAsString = parts[0];
+                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate transactionDate = LocalDate.parse(transactionDateAsString, formatter1);
+
+                String transactionTimeAsString = parts[1];
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm:ss");
+                LocalTime transactionTime = LocalTime.parse(transactionTimeAsString, formatter2);
+
                 String description = parts[2];
                 transaction.setDescription(description);
-//                OR
-//                employee.setName(parts[1]);
+//              OR
+//              employee.setName(parts[1]);
 
+                String vendor = parts[3];
+                transaction.setVendor(vendor);
 
-//                String hoursWorkedAsString = parts[2];
-//                double hoursWorked = Double.parseDouble(hoursWorkedAsString);
-//                employee.setHoursWorked(hoursWorked);
-////                OR
-//                employee.setHoursWorked(Double.parseDouble(parts[2]));
+                String amountAsString = parts[4];
+                double amount = Double.parseDouble(amountAsString);
+                transaction.setAmount(amount);
+//              OR
+//              employee.setHoursWorked(Double.parseDouble(parts[2]));
 
 
             }
