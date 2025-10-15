@@ -16,11 +16,6 @@ public class Application {
 
     public static void main(String[] args) {
 
-         transactions = readTransactions();
-
-        for (Transaction transaction : transactions) {
-            System.out.println(transaction);
-        }
 
             runMainMenu();
             scanner.close();
@@ -44,7 +39,6 @@ public class Application {
                     makePayment();
                     break;
                 case "L":
-                    displayLedger();
                     runLedger();
                     break;
                 case"X":
@@ -56,6 +50,7 @@ public class Application {
             }
 
             System.out.println(); // blank line for spacing
+
         }
     }
 
@@ -70,10 +65,8 @@ public class Application {
 
     public static void addDeposit(){
 
-
         try {
-            System.out.print("Add deposit: ");
-            double transaction1 = scanner.nextDouble();
+            System.out.print("Add deposit amount: ");
 
             // create a FileWriter
             FileWriter fileWriter = new FileWriter("transactions.csv", true);
@@ -84,6 +77,7 @@ public class Application {
             Transaction transaction = null;
             try {
                 userDepositAmount = scanner.nextDouble();
+                scanner.nextLine();
                 transaction = new Transaction(LocalDate.now(),
                         LocalTime.now(),
                         "Deposit",
@@ -93,9 +87,8 @@ public class Application {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            // write to the file
-            bufferedWriter.write(transaction.toString()); // <=========
-            // close the writer
+
+            bufferedWriter.write(transaction.toString());
             bufferedWriter.newLine();
             bufferedWriter.flush();
             bufferedWriter.close();
@@ -105,7 +98,43 @@ public class Application {
         }
     }
 
-    // Main menu loop
+
+    private static void makePayment() {
+
+        try {
+            System.out.print("Add payment amount: ");
+
+            // create a FileWriter
+            FileWriter fileWriter = new FileWriter("transactions.csv", true);
+            // create a BufferedWriter
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            double userPaymentAmount = 0;
+            Transaction transaction = null;
+            try {
+                userPaymentAmount = scanner.nextDouble();
+                scanner.nextLine();
+                transaction = new Transaction(LocalDate.now(),
+                        LocalTime.now(),
+                        "Payment",
+                        "User",
+                        -userPaymentAmount
+                );
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+            bufferedWriter.write(transaction.toString());
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println("ERROR: An unexpected error occurred");
+            e.getStackTrace();
+        }
+    }
+
+    // Ledger loop
     public static void runLedger() {
         boolean running = true;
 
@@ -145,13 +174,18 @@ public class Application {
         System.out.println("(D) Display only the entries that are deposits into the account");
         System.out.println("(P) Display only the negative entries or payments");
         System.out.println("(R) Reports");
-        System.out.println("(H) Go Back to Home Page..");
+        System.out.println("(H) Go Back to Home Page.");
     }
 
-    // Example menu actions
+    // Menu actions
     public static void displayAllEntries() {
+
+        transactions = readTransactions();
+
         for (Transaction transaction : transactions) {
-            System.out.println(transactions.toString());
+            System.out.println(transactions);
+
+
         }
     }
 
@@ -163,8 +197,6 @@ public class Application {
     }
     public static void displayReports() {
 
-    }
-    private static void makePayment() {
     }
 
 

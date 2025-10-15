@@ -72,14 +72,13 @@ public class Transaction {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Transaction{");
-        sb.append("transactionDate=").append(transactionDate);
-        sb.append(", transactionTime=").append(transactionTime);
-        sb.append(", description='").append(description).append('\'');
-        sb.append(", vendor='").append(vendor).append('\'');
-        sb.append(", amount=").append(amount);
-        sb.append('}');
-        return sb.toString();
+        return String.format("%s|%s|%s|%s|%.2f",
+                transactionDate,
+                transactionTime.withNano(0),
+                description,
+                vendor,
+                amount
+        );
     }
 }
 
