@@ -999,9 +999,15 @@ date|time|description|vendor|amount
 2023-02-13|14:43:00|consulting fee|Delta Partners|3793.98
 2023-08-02|02:20:55|ergonomic chair|Acme Corp|2428.55
 2025-05-22|02:46:02|internet bill|Mark Thompson|1516.47
-2025-10-15|15:12:51|Deposit|User|123.00
-2025-10-15|15:55:11|Payment|User|-33.00
-2025-10-15|16:46:11|Deposit|User|123.00
-2025-10-15|16:47:16|Deposit|User|1234.00
-2025-10-16    14:07:19     Deposit                      User                  999999.00
-2025-10-16    14:07:28     Payment                      User                  -444444.00
+2025-10-16|14:29:40|Deposit|User|123.0
+2025-10-16|14:30:10|internet bill|Mark Thompson|-456.0
+2025-10-16|14:36:15|Deposit|User|9090.0
+2025-10-16|14:36:51|Deposit|User|909.0
+2025-10-16|14:57:59|internet bill|joe|-444.0
+2025-10-16|14:58:54|Deposit|User|1333.0
+2025-10-16|14:59:16|Deposit|User|333.0
+2025-10-16|15:01:42|phone|yair |1222.0
+2025-10-16|15:03:00|phone|bob|-90.0
+2025-10-16|15:08:28|laptop|me|555.0
+2025-10-16|15:13:34|keyboard|tim|-98.0
+2025-10-16|15:22:50|charger|you|333.0

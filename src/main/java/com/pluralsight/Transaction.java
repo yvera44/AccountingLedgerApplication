@@ -69,10 +69,21 @@ public class Transaction {
         this.amount = amount;
     }
 
+    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
+    public String toCsv() {
+        return this.transactionDate.format(dateFormatter) + "|" +
+                this.transactionTime.format(timeFormatter) + "|" +
+                this.description + "|" +
+                this.vendor + "|" +
+                this.amount;
+    }
 
     @Override
     public String toString() {
+
+
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm:ss");
         String formattedTime = transactionTime.format(formatter2);
         return String.format("%-12s  %-12s %-27s  %-20s  %.2f",

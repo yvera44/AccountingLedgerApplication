@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -73,25 +72,29 @@ public class Application {
             // create a BufferedWriter
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            double userDepositAmount = 0;
-            Transaction transaction = null;
+            double userDepositAmount;
+            Transaction transaction;
             try {
                 userDepositAmount = scanner.nextDouble();
                 scanner.nextLine();
+                System.out.println("Enter description ");
+                String userDescription = scanner.nextLine();
+                System.out.println("Enter vendor ");
+                String userToVendor = scanner.nextLine();
                 transaction = new Transaction(LocalDate.now(),
                         LocalTime.now(),
-                        "Deposit",
-                        "User",
+                        userDescription,
+                        userToVendor,
                         userDepositAmount
                 );
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 
-            bufferedWriter.write(transaction.toString());
-            bufferedWriter.newLine();
+            bufferedWriter.write("\n" + transaction.toCsv());
             bufferedWriter.flush();
             bufferedWriter.close();
+            transactions.add(transaction);
         } catch (IOException e) {
             System.out.println("ERROR: An unexpected error occurred");
             e.getStackTrace();
@@ -108,25 +111,29 @@ public class Application {
             // create a BufferedWriter
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            double userPaymentAmount = 0;
-            Transaction transaction = null;
+            double userPaymentAmount;
+            Transaction transaction;
             try {
                 userPaymentAmount = scanner.nextDouble();
                 scanner.nextLine();
+                System.out.println("Enter description ");
+                String userDescription = scanner.nextLine();
+                System.out.println("Enter vendor ");
+                String userToVendor = scanner.nextLine();
                 transaction = new Transaction(LocalDate.now(),
                         LocalTime.now(),
-                        "Payment",
-                        "User",
-                        -userPaymentAmount
-                );
+                        userDescription,
+                        userToVendor,
+                        -userPaymentAmount);
+
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 
-            bufferedWriter.write(transaction.toString());
-            bufferedWriter.newLine();
+            bufferedWriter.write("\n" + transaction.toCsv());
             bufferedWriter.flush();
             bufferedWriter.close();
+            transactions.add(transaction);
         } catch (IOException e) {
             System.out.println("ERROR: An unexpected error occurred");
             e.getStackTrace();
@@ -269,7 +276,7 @@ public class Application {
         LocalDate startDate = currentDate.withDayOfMonth(1);
 
         for (Transaction transaction : transactions){
-            if (transaction.getTransactionDate().isAfter(startDate) && transaction.getTransactionDate().isBefore(currentDate)){
+            if (transaction.getTransactionDate().isAfter(startDate)){
                 System.out.println(transaction);
             }
         }
