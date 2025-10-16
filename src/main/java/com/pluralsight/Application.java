@@ -16,10 +16,8 @@ public class Application {
 
     public static void main(String[] args) {
 
-
             runMainMenu();
             scanner.close();
-
     }
 
     // Main menu loop
@@ -56,11 +54,12 @@ public class Application {
 
     // Display menu
     public static void displayMenu() {
-        System.out.println("===== Main Menu =====");
-        System.out.println("(D) Add Deposit");
-        System.out.println("(P) Make Payment (Debit)");
-        System.out.println("(L) Display Ledger Screen");
-        System.out.println("(X) Exit");
+        System.out.println("""
+                ======= Main Menu =======
+                (D) Add Deposit
+                (P) Make Payment (Debit)
+                (L) Display Ledger Screen
+                (X) Exit""");
     }
 
     public static void addDeposit(){
@@ -97,7 +96,6 @@ public class Application {
             e.getStackTrace();
         }
     }
-
 
     private static void makePayment() {
 
@@ -154,11 +152,12 @@ public class Application {
                     displayPayments();
                     break;
                 case "R":
-                    displayReports();
+                    runReports();
                     break;
                 case "H":
-                    System.out.println("Exiting to Home Screen");
+                    System.out.println("Exiting to Home Screen...");
                     running = false;
+
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -169,15 +168,18 @@ public class Application {
     }
 
     public static void displayLedger() {
-        System.out.println("===== Ledger =====");
-        System.out.println("(A) Display All Entries");
-        System.out.println("(D) Display only the entries that are deposits into the account");
-        System.out.println("(P) Display only the negative entries or payments");
-        System.out.println("(R) Reports");
-        System.out.println("(H) Go Back to Home Page.");
+        System.out.println("""
+                ========= Ledger =========
+                (A) Display All Entries
+                (D) Display deposits
+                (P) Display payments
+                (R) Reports
+                (H) Home Page""");
+
     }
 
     // Menu actions
+    // Display All Entries
     public static void displayAllEntries() {
 
         transactions = readTransactions();
@@ -185,17 +187,95 @@ public class Application {
         for (Transaction transaction : transactions) {
             System.out.println(transactions);
 
-
         }
     }
 
+    // Display Deposits
     public static void displayDeposits() {
 
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() >= 0) {
+
+
+            }
+
+        }
+
     }
+    // Display Payments
     public static void displayPayments() {
 
     }
+    //Open Reports Menu
+    public static void runReports() {
+        boolean running = true;
+
+        while (running) {
+            displayReports();
+            System.out.print("Choose an option: ");
+            String choice = scanner.nextLine().trim().toUpperCase();
+
+            switch (choice) {
+                case "1":
+                    displayMonthToDate();
+                    break;
+                case "2":
+                    displayPreviousMonth();
+                    break;
+                case"3":
+                    displayYearToDate();
+                    break;
+                case"4":
+                    displayPreviousYear();
+                    break;
+                case"5":
+                    displayByVendor();
+                case"0":
+                    System.out.println("Returining to Ledger Screen...");
+                    runLedger();
+                case "H":
+                    System.out.println("Exiting to Home Screen...");
+                    running = false;
+                    runMainMenu();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+
+            System.out.println(); // blank line for spacing
+        }
+    }
     public static void displayReports() {
+        System.out.println("""
+                ========= Reports =========
+                (1) Display by Month to Date
+                (2) Display Previous Month
+                (3) Display Year to Date
+                (4) Display Previous Year
+                (5) Display by Vendor
+                (0) Return to Ledger
+                (H) Exit to Home Screen""");
+
+    }
+
+    public static void displayMonthToDate(){
+        System.out.println("Month to Date");
+
+    }
+    public static void displayPreviousMonth(){
+        System.out.println("Previous Month");
+
+    }
+    public static void displayYearToDate(){
+        System.out.println("Year to Date");
+
+    }
+    public static void displayPreviousYear(){
+        System.out.println("Previous Year");
+
+    }
+    public static void displayByVendor(){
+        System.out.println("Vendor");
 
     }
 
@@ -209,6 +289,7 @@ public class Application {
 
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
+
 
             bufferedReader.readLine();
 
@@ -240,7 +321,6 @@ public class Application {
                 transaction.setAmount(amount);
 //              OR
 //              employee.setHoursWorked(Double.parseDouble(parts[2]));
-
 
             }
             bufferedReader.close();

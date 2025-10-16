@@ -28,8 +28,6 @@ public class Transaction {
         this.amount = amount;
     }
 
-
-
     public LocalDate getTransactionDate() {
         return transactionDate;
     }
@@ -79,6 +77,8 @@ public class Transaction {
                 vendor,
                 amount
         );
+    }
+    public void add(Transaction transaction) {
     }
 }
 
