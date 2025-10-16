@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -264,9 +265,15 @@ public class Application {
 
     public static void displayMonthToDate(){
 
-        LocalDate currentMonth = LocalDate.now();
+        LocalDate currentDate = LocalDate.now();
+        LocalDate startDate = currentDate.withDayOfMonth(1);
 
-
+        for (Transaction transaction : transactions){
+            if (transaction.getTransactionDate().isAfter(startDate) && transaction.getTransactionDate().isBefore(currentDate)){
+                System.out.println(transaction);
+            }
+        }
+        System.out.println("===========================================");
     }
     public static void displayPreviousMonth(){
 
@@ -279,7 +286,7 @@ public class Application {
                 System.out.println(transaction);
             }
         }
-
+        System.out.println("===========================================");
     }
     public static void displayYearToDate(){
 
@@ -317,6 +324,9 @@ public class Application {
                 System.out.println(transaction);
                 found = true;
             }
+        }
+        if (!found) {
+            System.out.println("Vendor not found. Please enter a different vendor. ");
         }
     }
 
