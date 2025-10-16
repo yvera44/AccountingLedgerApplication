@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 public class Application {
     private static final Scanner scanner = new Scanner(System.in);
-    static ArrayList<Transaction> transactions;
+    static ArrayList<Transaction> transactions = readTransactions();
 
     public static void main(String[] args) {
 
@@ -175,27 +175,25 @@ public class Application {
                 (P) Display payments
                 (R) Reports
                 (H) Home Page""");
-
     }
 
     // Menu actions
     // Display All Entries
     public static void displayAllEntries() {
 
-        transactions = readTransactions();
-
         for (Transaction transaction : transactions) {
-            System.out.println(transactions);
+            System.out.println(transaction);
 
         }
     }
 
     // Display Deposits
     public static void displayDeposits() {
+        System.out.println(transactions);
 
         for (Transaction transaction : transactions) {
             if (transaction.getAmount() >= 0) {
-
+                System.out.println(transaction);
 
             }
 
@@ -205,6 +203,12 @@ public class Application {
     // Display Payments
     public static void displayPayments() {
 
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() < 0) {
+                System.out.println(transaction);
+
+            }
+        }
     }
     //Open Reports Menu
     public static void runReports() {
@@ -230,6 +234,7 @@ public class Application {
                     break;
                 case"5":
                     displayByVendor();
+                    break;
                 case"0":
                     System.out.println("Returining to Ledger Screen...");
                     runLedger();
@@ -275,8 +280,18 @@ public class Application {
 
     }
     public static void displayByVendor(){
-        System.out.println("Vendor");
 
+        System.out.println("Enter vendor name: ");
+        String searchVendor = scanner.nextLine().trim();
+
+        boolean found = false;
+
+        for (Transaction transaction : transactions) {
+            if (transaction.getVendor().equalsIgnoreCase(searchVendor)) {
+                System.out.println(transaction);
+                found = true;
+            }
+        }
     }
 
 
@@ -290,28 +305,29 @@ public class Application {
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
 
-
             bufferedReader.readLine();
 
             while ((line = bufferedReader.readLine()) != null) {
 
                 String[] parts = line.split(Pattern.quote("|"));
-                System.out.println(line);
+                //might need sout here
+                if(parts.length != 5) continue;
 
                 Transaction transaction = new Transaction();
 
                 String transactionDateAsString = parts[0];
                 DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate transactionDate = LocalDate.parse(transactionDateAsString, formatter1);
+                transaction.setTransactionDate(transactionDate);
 
                 String transactionTimeAsString = parts[1];
                 DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("HH:mm:ss");
                 LocalTime transactionTime = LocalTime.parse(transactionTimeAsString, formatter2);
+                transaction.setTransactionTime(transactionTime);
 
                 String description = parts[2];
                 transaction.setDescription(description);
-//              OR
-//              employee.setName(parts[1]);
+
 
                 String vendor = parts[3];
                 transaction.setVendor(vendor);
@@ -319,8 +335,7 @@ public class Application {
                 String amountAsString = parts[4];
                 double amount = Double.parseDouble(amountAsString);
                 transaction.setAmount(amount);
-//              OR
-//              employee.setHoursWorked(Double.parseDouble(parts[2]));
+                transactions.add(transaction);
 
             }
             bufferedReader.close();

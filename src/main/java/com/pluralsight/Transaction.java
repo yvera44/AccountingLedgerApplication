@@ -72,7 +72,7 @@ public class Transaction {
     public String toString() {
         return String.format("%s|%s|%s|%s|%.2f",
                 transactionDate,
-                transactionTime.withNano(0),
+                transactionTime,
                 description,
                 vendor,
                 amount
