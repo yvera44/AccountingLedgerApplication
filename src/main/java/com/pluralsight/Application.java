@@ -194,7 +194,6 @@ public class Application {
 
         }
     }
-
     // Display Deposits
     public static void displayDeposits() {
         System.out.println(transactions);
@@ -217,7 +216,7 @@ public class Application {
             }
         }
     }
-    //Open Reports Menu
+    // Open Reports Menu
     public static void runReports() {
         boolean running = true;
 
@@ -269,7 +268,7 @@ public class Application {
                 (H) Exit to Home Screen""");
 
     }
-
+    // Report options
     public static void displayMonthToDate(){
 
         LocalDate currentDate = LocalDate.now();
