@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 public class Application {
     private static final Scanner scanner = new Scanner(System.in);
-    static ArrayList<Transaction> transactions = readTransactions();
+    static ArrayList<Transaction> transactions = readTransactions(); //empty basket
 
     public static void main(String[] args) {
 
@@ -198,7 +198,6 @@ public class Application {
             }
 
         }
-
     }
     // Display Payments
     public static void displayPayments() {
@@ -252,7 +251,7 @@ public class Application {
     }
     public static void displayReports() {
         System.out.println("""
-                ========= Reports =========
+                ============== Reports ==============
                 (1) Display by Month to Date
                 (2) Display Previous Month
                 (3) Display Year to Date
@@ -264,20 +263,47 @@ public class Application {
     }
 
     public static void displayMonthToDate(){
-        System.out.println("Month to Date");
+
+        LocalDate currentMonth = LocalDate.now();
+
 
     }
     public static void displayPreviousMonth(){
-        System.out.println("Previous Month");
+
+        LocalDate lastMonth = LocalDate.now().minusMonths(1);
+        int previousMonth = lastMonth.getMonthValue();
+        int currentYear = lastMonth.getYear();
+
+        for (Transaction transaction : transactions){
+            if (transaction.getTransactionDate().getMonthValue() == previousMonth && transaction.getTransactionDate().getYear() == currentYear){
+                System.out.println(transaction);
+            }
+        }
 
     }
     public static void displayYearToDate(){
-        System.out.println("Year to Date");
 
+        int currentYear = LocalDate.now().getYear();
+
+        for (Transaction transaction : transactions){
+            if (transaction.getTransactionDate().getYear() == currentYear) {
+                System.out.println(transaction);
+            }
+        }
+        System.out.println("===========================================");
     }
     public static void displayPreviousYear(){
-        System.out.println("Previous Year");
 
+        LocalDate  currentYear = LocalDate.now();
+        LocalDate oneYearAgo = currentYear.minusYears(1);
+        int previousYear = oneYearAgo.getYear();
+
+        for (Transaction transaction : transactions){
+            if (transaction.getTransactionDate().getYear() == previousYear){
+                System.out.println(transaction);
+            }
+        }
+        System.out.println("===========================================");
     }
     public static void displayByVendor(){
 
@@ -328,14 +354,13 @@ public class Application {
                 String description = parts[2];
                 transaction.setDescription(description);
 
-
                 String vendor = parts[3];
                 transaction.setVendor(vendor);
 
                 String amountAsString = parts[4];
                 double amount = Double.parseDouble(amountAsString);
                 transaction.setAmount(amount);
-                transactions.add(transaction);
+                transactions.add(transaction); //adds transactions to basket
 
             }
             bufferedReader.close();

@@ -70,7 +70,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("%s|%s|%s|%s|%.2f",
+        return String.format("%-12s  %s-12 %-27s  %-20s  %.2f",
                 transactionDate,
                 transactionTime,
                 description,
