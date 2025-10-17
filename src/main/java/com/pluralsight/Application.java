@@ -40,7 +40,7 @@ public class Application {
                     runLedger();
                     break;
                 case"X":
-                    System.out.println("Exiting... Goodbye!");
+                    System.out.println("Exiting.... Goodbye!");
                     running = false;
                     break;
                 default:
@@ -77,9 +77,9 @@ public class Application {
             try {
                 userDepositAmount = scanner.nextDouble();
                 scanner.nextLine();
-                System.out.println("Enter description ");
+                System.out.print("Enter description ");
                 String userDescription = scanner.nextLine();
-                System.out.println("Enter vendor ");
+                System.out.print("Enter vendor ");
                 String userToVendor = scanner.nextLine();
                 transaction = new Transaction(LocalDate.now(),
                         LocalTime.now(),
@@ -87,6 +87,7 @@ public class Application {
                         userToVendor,
                         userDepositAmount
                 );
+                System.out.println("\nDeposit made. Thank you!");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -116,15 +117,17 @@ public class Application {
             try {
                 userPaymentAmount = scanner.nextDouble();
                 scanner.nextLine();
-                System.out.println("Enter description ");
+                System.out.print("Enter description ");
                 String userDescription = scanner.nextLine();
-                System.out.println("Enter vendor ");
+                System.out.print("Enter vendor ");
                 String userToVendor = scanner.nextLine();
                 transaction = new Transaction(LocalDate.now(),
                         LocalTime.now(),
                         userDescription,
                         userToVendor,
-                        -userPaymentAmount);
+                        -userPaymentAmount
+                );
+                System.out.println("\nPayment received. Thank you!");
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -163,7 +166,7 @@ public class Application {
                     runReports();
                     break;
                 case "H":
-                    System.out.println("Exiting to Home Screen...");
+                    System.out.println("Returning to Home Screen....");
                     running = false;
 
                     break;
@@ -242,10 +245,10 @@ public class Application {
                     displayByVendor();
                     break;
                 case"0":
-                    System.out.println("Returining to Ledger Screen...");
+                    System.out.println("Returning to Ledger Screen....");
                     runLedger();
                 case "H":
-                    System.out.println("Exiting to Home Screen...");
+                    System.out.println("Exiting to Home Screen..... ");
                     running = false;
                     runMainMenu();
                     break;
@@ -332,7 +335,7 @@ public class Application {
             }
         }
         if (!found) {
-            System.out.println("Vendor not found. Please enter a different vendor. ");
+            System.out.println("Vendor not found. Please try again. ");
         }
     }
 
