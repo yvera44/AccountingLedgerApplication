@@ -78,3 +78,5 @@ the code to get it formatted pretty interesting.
 ![img_2.png](img_2.png)
 * This shows the Reports menu
 ![img_3.png](img_3.png)
+
+## That is all :) Thank you for using my app!
