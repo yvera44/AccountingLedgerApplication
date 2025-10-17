@@ -1,6 +1,6 @@
 # Accounting Ledger Application
 
-## Applicatioin Description: 
+## Application Description: 
 This application helps you track deposits, and payments. The application also allows you to search 
 transactions by deposits, payments, vendors, month to date, previous month, year to date, and previous year
 
