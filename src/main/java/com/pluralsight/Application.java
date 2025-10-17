@@ -352,7 +352,7 @@ public class Application {
             while ((line = bufferedReader.readLine()) != null) {
 
                 String[] parts = line.split(Pattern.quote("|"));
-                //might need sout here
+
                 if(parts.length != 5) continue;
 
                 Transaction transaction = new Transaction();

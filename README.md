@@ -14,7 +14,8 @@ transactions by deposits, payments, vendors, month to date, previous month, year
     * Previous Year
     * Search by Vendor
   
-### The following code is one I'm proud of since I worked through most of it by myself:
+The code I'm probably most proud of is the method that runs the Reports menu. I was able to get this menu running
+without encountering any issues pretty quickly. 
 
 ``` java
 public static void runReports() {
@@ -67,3 +68,13 @@ boolean running = true;
                 (H) Exit to Home Screen""");
     }
 ```
+### Images: 
+* This image shows some formatting I did to display the transactions in a more readable format. I found
+the code to get it formatted pretty interesting. 
+![img.png](img.png)
+ * This shows the Main menu
+![img_1.png](img_1.png)
+ * This shows the Ledger menu
+![img_2.png](img_2.png)
+* This shows the Reports menu
+![img_3.png](img_3.png)
